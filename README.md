@@ -1,5 +1,7 @@
 # AlleyCat Barbers
 
+_Initial Build: Aug 2024_
+
 A web-based barber shop management system built with ASP.NET Core 8.0. Supports appointment booking, service management, customer reviews, and email communications — with role-based access for admins, staff, and customers.
 
 ![AlleyCat Barbers](screenshot.png)

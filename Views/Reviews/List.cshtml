@@ -1,0 +1,90 @@
+﻿@model AlleyCatBarbers.ViewModels.ReviewListViewModel
+
+@{
+    ViewData["Title"] = "Reviews";
+}
+
+<h1>Reviews</h1>
+@if (User.IsInRole("Customer"))
+{
+    <p>
+        <form asp-action="Create" method="post">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </p>
+}
+@if (Model.Reviews == null || !Model.Reviews.Any())
+{
+    <div class="review">
+        <p>No reviews to display</p>
+    </div>
+}
+else
+{
+    // Show full and half stars to accompany rating scores
+    int fullStars = (int)Math.Floor(Model.AverageRating);
+    bool hasHalfStar = (Model.AverageRating - fullStars) >= 0.5;
+
+    <div class="pb-2">
+        <h5>
+            Average: @Model.AverageRating/5
+            @for (int i = 0; i < fullStars; i++)
+            {
+                <i class="fas fa-star"></i> <!-- Full star -->
+            }
+            @if (hasHalfStar)
+            {
+                <i class="fas fa-star-half-alt"></i> <!-- Half star -->
+            }
+        </h5>
+    </div>
+
+
+
+    <div class="container mt-4">
+        <table id="reviewTable" class="table dt-responsive nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var review in Model.Reviews)
+                {
+                    <tr>
+                        <td>
+                            <div class="card pt-2">
+                                <div class="card-body bg-light">
+                                    <h6 class="card-title">
+                                        @review.Rating/5
+                                        @for (int i = 0; i < @review.Rating; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                    </h6>
+                                    <p class="card-text pt-3 pb-2">"@review.Comments"</p>
+                                    <p class="card-subtitle mb-2 text-muted">
+                                        @review.FirstName<br />
+                                        <small>@review.DateCreated</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                
+                                <form asp-action="Delete" asp-route-id="@review.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+}
+

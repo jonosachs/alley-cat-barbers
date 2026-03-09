@@ -1,0 +1,56 @@
+﻿@model AlleyCatBarbers.ViewModels.BookingViewModel
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" id="editBookingForm" data-mode="edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" id="hiddenDate" value="@Model.Date.ToString("yyyy-MM-dd")" />
+            <input type="hidden" id="hiddenTimeSlot" value="@Model.TimeSlot" />
+            <div class="form-group">
+                <label asp-for="ServiceId" class="control-label">Service</label>
+                <select asp-for="ServiceId" id="serviceId" class="form-control" asp-items="ViewBag.ServiceId"></select>
+                <span asp-validation-for="ServiceId" class="text-danger"></span>
+            </div>
+            <div class="form-group pt-2">
+                <label asp-for="Date" class="control-label">Date</label>
+                <input asp-for="Date" type="text" id="bookingDate" class="form-control"/>
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group pt-2">
+                <label asp-for="TimeSlot" class="control-label">Time</label>
+                <select asp-for="TimeSlot" id="timeSlot" class="form-control">
+                    <option value="">Choose..</option>
+                </select>
+                <span asp-validation-for="TimeSlot" class="text-danger"></span>
+            </div>
+            <div class="form-group pt-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="/js/bookingFieldActions.js"></script>
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,82 @@
+﻿@model AlleyCatBarbers.ViewModels.EmailViewModel
+
+@{
+    ViewData["Title"] = "Email";
+}
+
+<h1>Email</h1>
+
+<h4>Create New Email</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SendEmail" enctype="multipart/form-data"
+              data-email-sent="@ViewBag.EmailSent" novalidate>
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success">@ViewBag.Message</div>
+                <script>
+                    window.onload = function() {
+                        var button = document.getElementById('submitButton');
+                        if (button) {
+                            button.disabled = true;
+                        } else {
+                            console.error("Submit button not found.");
+                        }
+                    };
+                </script>
+            }
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger" style="word-wrap: break-word;">@ViewBag.Error</div>
+            }
+
+            <div class="form-group">
+                <label asp-for="To" class="control-label"></label>
+                <input asp-for="To" class="form-control" />
+                <span asp-validation-for="To" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+                <input asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <textarea asp-for="Message" class="form-control" rows="5" cols="50"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Attachment" class="control-label"></label>
+                <input asp-for="Attachment" class="form-control" type="file" />
+                <span asp-validation-for="Attachment" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-primary" id="submitButton" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Back</a>
+</div>
+
+@section Scripts {
+
+    <script src="/js/emailWaitingSpinner.js"></script>
+    
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,31 @@
+﻿@model AlleyCatBarbers.Models.Booking
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">Date</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.Date)</dd>
+        <dt class="col-sm-2">Time</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.TimeSlot)</dd>
+        <dt class = "col-sm-2">User</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.User.UserName)</dd>
+        <dt class = "col-sm-2">Service</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.Service.Type)</dd>
+        <dt class="col-sm-2">Price</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Service.Price)</dd>
+    </dl>
+</div>
+<div>
+    
+    <form asp-action="Edit" asp-route-id="@Model?.Id" method="post">
+        <button type="submit" class="btn btn-secondary">Edit</button>
+    </form>
+    <a asp-action="Index">Back to List</a>
+</div>

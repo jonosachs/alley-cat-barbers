@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AlleyCatBarbers.Models.Service>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Services</h1>
+
+@if (User.IsInRole("Admin") | User.IsInRole("Staff"))
+{
+    <p>
+        <form asp-action="Create" method="post">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td>No Services..</td>
+            </tr>
+        }
+        @foreach (var item in Model) {
+            <tr>
+                <td>@item.Type</td>
+                <td>@item.Price</td>
+                <td>@item.Description</td>
+           
+                <td>
+                    @if (User.IsInRole("Admin") | User.IsInRole("Staff"))
+                    {
+                        <form asp-action="Edit" asp-route-id="@item.Id" method="get" class="d-inline">
+                            <button type="submit" class="btn btn-secondary btn-sm">Edit</button>
+                        </form>
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    }
+                    <form asp-action="Details" asp-route-id="@item.Id" method="get" class="d-inline">
+                        <button type="submit" class="btn btn-secondary btn-sm">Details</button>
+                    </form>
+                </td>
+            
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>

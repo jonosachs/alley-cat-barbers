@@ -1,0 +1,57 @@
+﻿@model AlleyCatBarbers.ViewModels.BookingViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ServiceId" class="control-label">Service</label>
+                <select asp-for="ServiceId" id="serviceId" class="form-control" asp-items="ViewBag.ServiceId">
+                    <option value="">Choose..</option>
+                </select>
+                <span asp-validation-for="ServiceId" class="text-danger"></span>
+            </div>
+            <div class="form-group pt-2">
+                <label asp-for="Date" class="control-label">Select Date</label>
+                <input type="text" asp-for="Date" id="bookingDate" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group pt-2">
+                <label asp-for="TimeSlot" class="control-label">Select A Time</label>
+                <select asp-for="TimeSlot" id="timeSlot" class="form-control" asp-items="ViewBag.TimeSlots" disabled>
+                    <option value="">Choose..</option>
+                </select>
+                <span asp-validation-for="TimeSlot" class="text-danger"></span>
+            </div>
+            <div class="form-group pt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
+@section Scripts {
+
+    <script src="/js/bookingFieldActions.js"></script>
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+    
+

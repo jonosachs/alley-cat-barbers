@@ -1,0 +1,50 @@
+﻿/* Main Title */
+.fc .fc-toolbar-title {
+    font-size: 1.5em;
+    color: #333333;
+}
+
+
+.fc .fc-daygrid-day-number {
+    font-size: 0.8em; /* Day number font size */
+    color: #333333; /* Day number color */
+}
+
+.fc .fc-daygrid-day-frame {
+    font-size: 0.8em; /* Day cell font size */
+    color: #333333; /* Day cell color */
+}
+
+/* Events */
+.fc-event {
+    font-size: 12px; 
+    color: #ffffff; 
+    background-color: #007bff; 
+    border: none;
+}
+
+/* Day header cells */
+.fc .fc-col-header-cell {
+    background-color: #f8f9fa;
+}
+
+ /* Day header text */
+.fc .fc-col-header-cell-cushion {
+    color: #333333;
+    font-size: 1.1em;
+    font-weight: normal;
+}
+
+/* Weekends */
+.fc .fc-day-sun, .fc .fc-day-sat {
+    background-color: #f0f0f0;
+}
+
+/* Today indicator */
+.fc .fc-day-today {
+    background-color: #ffd800; 
+    color: #000000;
+}
+
+
+

@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AlleyCatBarbers</title>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="@Url.Content("~/lib/bootstrap/dist/css/bootstrap.min.css")" />
+   @*  <link rel="stylesheet" href="@Url.Content("~/css/site.css")" asp-append-version="true" /> *@
+    @* <link rel="stylesheet" href="@Url.Content("~/AlleyCatBarbers.styles.css")" asp-append-version="true" /> *@
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.css")" asp-append-version="true" />
+
+    <!-- JQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+
+    <!-- Datatables -->
+    <link rel="preload" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+   
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark text-white navbar-toggleable-sm navbar-expand-sm">
+            <div class="container-fluid">
+              @*   <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AlleyCatBarbers</a> *@
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse text-white collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-itemm active">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Bookings" asp-action="Index">Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Reviews" asp-action="List">Reviews</a>
+                        </li>
+                        @if (User.IsInRole("Admin") | User.IsInRole("Staff"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Emails" asp-action="SendEmail">Email</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="d-flex justify-content-center pt-3">
+            <div id="spinner" class="spinner-border" role="status"></div>
+        </div>
+        <main id="main-content" role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <footer class="border-top footer text-muted" id="footer">
+        <div class="container">
+            &copy; 2024 - AlleyCatBarbers - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+    <!-- JQuery -->
+    <script src="@Url.Content("~/lib/jquery/dist/jquery.min.js")"></script>
+
+    <!-- JQuery UI -->
+    <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="@Url.Content("~/lib/bootstrap/dist/js/bootstrap.bundle.min.js")"></script>
+    
+    <!-- Datatables -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js" defer></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js" defer></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js" defer></script>
+    
+    <!-- JQuery Validation -->
+    <script src="@Url.Content("~/lib/jquery-validation/dist/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js")"></script>
+
+    <!-- Custom -->
+    <script src="@Url.Content("~/js/site.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/dataTables.js")"></script>
+    
+    <!-- Hide spinner and show content once content loaded -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('spinner').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
